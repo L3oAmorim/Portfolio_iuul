@@ -1,0 +1,43 @@
+.cabecalho {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 35px;
+	justify-content: space-between;
+	background-color: #343a40;
+}
+
+.cabecalho-logo {
+	color: #FFFFFF;
+}
+
+.cabecalho-menu {
+	color: #FFFFFF;
+	font-weight: 600;
+	font-size: 20px;
+	display: flex;
+	gap: 32px;
+}
+
+.cabecalho-menu-item{
+  text-decoration: none;
+  color: #FFFFFF;  
+}
+
+.cabecalho-menu-item:hover{
+  color: #1abc9c;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    background-color: #a8a8a8;
+    
+}
+
+
