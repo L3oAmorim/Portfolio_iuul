@@ -1,0 +1,637 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Calculadora</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+
+  <!-- loda D3.js-->
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <!-- Load billboard.js with style -->
+  <script src="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.css">
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+
+  <!--Lodash -->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js" integrity="sha256-7/yoZS3548fXSRXqc/xYzjsmuW3sFKzuvOCHd06Pmps="
+    crossorigin="anonymous"></script>
+
+  <!-- Moment Js-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <style>
+    .bb-ygrid-line.vermelho line {
+    stroke: #DC3445;
+}
+.bb-ygrid-line.vermelho text {
+    fill: #DC3445;
+}
+    </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="index.html">Inicio</a>
+        </li>
+          
+        <li class="nav-item">
+          <a class="nav-link" href="http://www.tesouro.gov.br/-/tesouro-direto-indicadores" target="_blank">Indices Tesouro direto <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://www.b3.com.br/pt_br/" target="_blank">Indices DI</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="calculadora.html">Calculadora Juros Compostos</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </nav>
+  <br>
+  <div class="container">
+    <br />
+    <h2>Aporte único a ser feito e por quantos meses calcular</h2>
+    <div class="form-row">
+      <div class="form-group col-xl-6">
+        <label>Quantia</label>
+        <input type="text" class="form-control" id="quantia" value="1000" oninput="realizaProjecao()">
+      </div>
+
+      <div class="form-group col-xl-6">
+        <label>Tempo maximo para projetar (meses)</label>
+        <input type="number" class="form-control" id="meses" oninput="realizaProjecao()">
+      </div>
+    </div>
+    <hr />
+    <h2>Taxas em valores ao ano (%a.a)</h2>
+    <div class="form-row">
+      <div class="form-group col-xl-6">
+        <label>IPCA</label>
+        <input type="number" value="2.85" class="form-control" id="ipca" oninput="realizaProjecao()">
+      </div>
+      <div class="form-group col-xl-6">
+        <label>IGPM</label>
+        <input type="number" value="6.68" class="form-control" id="igpm" oninput="realizaProjecao()">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-xl-6">
+        <label>Poupança</label>
+        <input type="number" value="3.4655" class="form-control" id="poupança" oninput="realizaProjecao()">
+      </div>
+      <div class="form-group col-xl-6">
+        <label>SELIC</label>
+        <input type="number" value="8" class="form-control" id="selic" oninput="realizaProjecao()">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-xl-6">
+        <label>DI</label>
+        <input type="number" value="6.39" class="form-control" id="di" oninput="realizaProjecao()">
+      </div>
+
+      <div class="form-group col-xl-6">
+        <label>Inflação</label>
+        <input type="number" value="6.5" class="form-control" id="inflacao" oninput="realizaProjecao()">
+      </div>
+    </div>
+
+    <hr />
+    <h2>Tesouro direto</h2>
+    <div class="form-row">
+      <div class="form-group col-xl-6">
+        <label>pre-fixado-2021</label>
+        <input type="number" value="838.09" class="form-control" id="pre-fixado-2021" oninput="realizaProjecao()">
+      </div>
+      <div class="form-group col-xl-6">
+        <label>pre-fixado-2025</label>
+        <input type="number" value="552.14" class="form-control" id="pre-fixado-2025" oninput="realizaProjecao()">
+      </div>
+    </div>
+
+
+    <br />
+
+
+    <div class="row">
+      <h2>Melhor investimento para cada periodo</h2>
+      <table class="table" id="tabela-melhor-investimento">
+        <thead>
+          <tr>
+            <th scope="col">investimento</th>
+            <th scope="col">periodo em meses</th>
+            <th scope="col">taxa</th>
+            <th scope="col">aliquota IR</th>
+            <th scope="col">valor Bruto</th>
+            <th scope="col">valor imposto de renda</th>
+            <th scope="col">valor lucro</th>
+          </tr>
+        </thead>
+        <tbody id="projecao-melhor-investimento">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-12">
+        <hr />
+        <h2>graficos</h2>
+        <div id="graficos">
+
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="row">
+      <button type="button" class="btn btn-info" onclick="download()">Download</button> <br />
+      <hr />
+    </div>
+
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="accordion" id="accordionExample">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="accordion" id="todosJuntos">
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseAllTogether"
+                  aria-expanded="false" aria-controls="collapseAllTogether">
+                  Todos os periodos juntos ordenados pelo valor liquido ASC
+                </button>
+              </h5>
+            </div>
+            <div id="collapseAllTogether" class="collapse" aria-labelledby="headingThree" data-parent="#todosJuntos">
+              <div class="card-body">
+                <table class="table" id="tabela-projecao">
+                  <thead>
+                    <tr>
+                      <th scope="col">investimento</th>
+                      <th scope="col">periodo em meses</th>
+                      <th scope="col">taxa</th>
+                      <th scope="col">aliquota IR</th>
+                      <th scope="col">valor Bruto</th>
+                      <th scope="col">valor imposto de renda</th>
+                      <th scope="col">valor lucro</th>
+                    </tr>
+                  </thead>
+                  <tbody id="projecao">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function jurosCompostos(valor, taxa, prazoEmAnos) {
+      const valorFinal = valor * (1 + taxa) ** prazoEmAnos;
+      return valorFinal.toFixed(2);
+    }
+    function getAliquotaImpostoRenda(meses) {
+      if (meses <= 6) {
+        return 1 - 0.225
+      } else if (meses > 6 && meses <= 12) {
+        return 1 - 0.20
+
+      } else if (meses > 12 && meses <= 24) {
+        return 1 - 0.175
+
+      } else if (meses >= 24) {
+        return 1 - 0.15
+      } else {
+        throw new Error('Error on getAliquotaImpostoRenda for' + meses)
+      }
+    }
+
+    function realizaProjecao() {
+      const quantia = document.querySelector('#quantia').value;
+      const meses = document.querySelector('#meses').value;
+
+      const ipca = document.querySelector('#ipca').value;
+      const igpm = document.querySelector('#igpm').value;
+      const poupanca = document.querySelector('#poupança').value;
+      const selic = document.querySelector('#selic').value;
+      const di = document.querySelector('#di').value;
+      const inflacao = document.querySelector('#inflacao').value;
+
+      const tesouro2021 = document.querySelector('#pre-fixado-2021').value;
+      const tesouro2025 = document.querySelector('#pre-fixado-2025').value;
+
+      //TODO: adicionar validacao
+
+      let projecao = [];
+
+      //limpando projecao anterior
+      document.querySelector('#projecao').innerHTML = ""
+      document.querySelector('#projecao-melhor-investimento').innerHTML = ""
+      document.querySelector('#graficos').innerHTML = "";
+      let graficos = []
+      var opcoes = [
+        /*
+            CDB
+        */
+        {
+          indice: "cdb {{taxa}}% do DI",
+          max: 130,
+          min: 90.5,
+          taxa: "({{di}} * ({{taxa}} / 100))",
+          ir: true
+        },
+        {
+          indice: "cdb {{taxa}}%",
+          max: 15,
+          min: 9,
+          taxa: "{{taxa}}",
+          ir: true
+        },
+        {
+          indice: "cdb IPCA + {{taxa}}%",
+          max: 9,
+          min: 4,
+          taxa: "{{ipca}} + {{taxa}}",
+          ir: true
+        },
+
+        /*
+            LCI & LCA
+        */
+        {
+          indice: "lci_lca {{taxa}}% DI",
+          max: 100,
+          min: 80,
+          taxa: "({{di}} * ({{taxa}} / 100))",
+          ir: false
+        },
+        {
+          indice: "lci_lca {{taxa}}%",
+          max: 9,
+          min: 4,
+          taxa: "{{taxa}}",
+          ir: false
+        },
+        {
+          indice: "lci_lca IPCA + {{taxa}}%",
+          max: 9,
+          min: 4,
+          taxa: "{{ipca}} + {{taxa}}",
+          ir: false
+        },
+        {
+          indice: "poupanca",
+          max: 0,
+          min: 0,
+          taxa: poupanca,
+          ir: false
+        },
+        {
+          indice: "tesouro selic + 0.01",
+          max: 0,
+          min: 0,
+          taxa: '{{selic}} + 0.01',
+          ir: true
+        },
+        {
+          indice: "tesouro 2021",
+          max: 0,
+          min: 0,
+          taxa: "parseFloat((quantia/tesouro2021) * 1000).toFixed(2)",
+          ir: false
+        },
+        {
+          indice: "tesouro 2025",
+          max: 0,
+          min: 0,
+          taxa: "parseFloat((quantia/tesouro2025) * 1000).toFixed(2)",
+          ir: false
+        },
+        {
+          indice: "tesouro IPCA + {{taxa}}%",
+          max: 9,
+          min: 4,
+          taxa: "{{ipca}} + {{taxa}}",
+          ir: true
+        },
+        {
+          indice: "tesouro semestral {{taxa}}%",
+          max: 11,
+          min: 4,
+          taxa: "{{taxa}}",
+          ir: true
+        }
+      ]
+
+      for (var investimento of opcoes) {
+        while (investimento.max >= investimento.min) {
+          let irMeses = 6;
+          while (irMeses <= meses) {
+            if (irMeses != 18) {
+              //se nao for tesouro direto prefixado 20.... OU
+              //se for tesouro direto prefixado e a soma dos meses na data de hoje bater ele coloca
+              if (investimento.indice.indexOf('tesouro 20') == -1 ||
+                (investimento.indice.indexOf('tesouro 20') != -1 && investimento.indice.indexOf(moment().add(irMeses, "months").year()) != -1)) {
+                let obj = {}
+                const taxa = eval(
+                  investimento.taxa
+                    .replace('{{di}}', di)
+                    .replace('{{ipca}}', ipca)
+                    .replace('{{selic}}', selic)
+                    .replace('{{taxa}}', investimento.max))
+
+                obj.indice = investimento.indice.replace('{{taxa}}', investimento.max);
+                obj.prazo = irMeses;
+                obj.taxa = investimento.indice.indexOf('tesouro 20') != -1 ? "" : parseFloat(taxa).toFixed(3);
+                obj.valorBruto = investimento.indice.indexOf('tesouro 20') != -1 ? taxa : jurosCompostos(quantia, taxa.toFixed(3) / 100, irMeses / 12);
+                obj.aliquotaIR = investimento.ir ? (1 - getAliquotaImpostoRenda(irMeses)).toFixed(3) : "0";
+
+                obj.valorIR = ((obj.valorBruto - quantia) * obj.aliquotaIR).toFixed(2)
+                obj.valorLiquido = obj.valorBruto - obj.valorIR;
+
+                if (typeof obj.valorLiquido != "number") {
+                  throw new Error('Formato errado, deveria ser numero')
+                }
+                projecao.push(obj)
+              }
+            }
+            irMeses = irMeses + 6;
+          }
+          investimento.max = investimento.max - 0.5
+        }
+      }
+
+      let melhorInvestimento = "";
+      let projectionType = 6;
+
+      document.querySelector('#accordionExample').innerHTML = "";
+
+      while (projectionType <= meses) {
+        document.querySelector('#graficos').innerHTML += `<hr/><div id="meses_${projectionType}" ></div>`;
+        let melhoresInvestimentosDoPeriodo = "";
+        if (projectionType != 18) {
+          const investimentos = []
+
+          //filtrando investimentos para aquele periodo
+          for (const item of projecao) {
+            if (item.prazo == projectionType) {
+              investimentos.push(item)
+            }
+          }
+
+
+          const ordenado = _.sortBy(investimentos, [function (o) {
+            return o.valorLiquido
+          }])
+
+          const item = _.last(ordenado)
+
+
+          melhorInvestimento += preencheLinha(item, jurosCompostos(quantia, inflacao / 100, projectionType / 12))
+          melhoresInvestimentosDoPeriodo = `
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-tabela-${projectionType}"
+                  aria-expanded="true" aria-controls="collapse-tabela-${projectionType}">
+                  Tabela investimentos ${projectionType} meses
+                </button>
+              </h5>
+            </div>
+
+  <div id="collapse-tabela-${projectionType}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">investimento</th>
+            <th scope="col">periodo em meses</th>
+            <th scope="col">taxa</th>
+            <th scope="col">aliquota IR</th>
+            <th scope="col">valor Bruto</th>
+            <th scope="col">valor imposto de renda</th>
+            <th scope="col">valor lucro</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-projecao-6">`
+
+          let cdbDI = ["cdb %DI"]
+          let cdbFixo = ["cdb %"]
+          let cdbIPCA = ["cdb IPCA"]
+
+
+          let lciDI = ["lci_lca %DI"]
+          let lciFixo = ["lci_lca %"]
+          let lciIPCA = ["lci_lca ipca + %"]
+
+          let tesouro2021Grafico = 0;
+          let tesouro2025Grafico = 0;
+
+          let tesouroIPCA = ["tesouro ipca + %"]
+          let tesouroSemestral = ["tesouro semestral %"]
+
+          //valores que sao unicos serao plotados como linhas de grid em Y
+          let poupancaGrafico = 0;
+          let tesouroselicGrafico = 0;
+          for (const opcao of ordenado) {
+            const valorArredondado = opcao.valorLiquido.toFixed(2)
+
+            if (opcao.indice.indexOf('cdb') != -1 &&
+              opcao.indice.indexOf('DI') != -1) {
+              cdbDI.push(valorArredondado)
+
+            } else if (opcao.indice.indexOf('cdb') != -1 &&
+              opcao.indice.indexOf('IPCA') != -1) {
+              cdbIPCA.push(valorArredondado)
+            }
+            else if (opcao.indice.indexOf('cdb') != -1) {
+              cdbFixo.push(valorArredondado)
+
+            } else if (opcao.indice.indexOf('lci_lca') != -1 &&
+              opcao.indice.indexOf('DI') != -1) {
+              lciDI.push(valorArredondado)
+
+            } else if (opcao.indice.indexOf('lci_lca') != -1 &&
+              opcao.indice.indexOf('IPCA') != -1) {
+              lciIPCA.push(valorArredondado)
+
+            } else if (opcao.indice.indexOf('lci_lca') != -1) {
+              lciFixo.push(valorArredondado)
+            }
+
+            else if (opcao.indice.indexOf("tesouro IPCA") != -1) {
+              tesouroIPCA.push(valorArredondado);
+            }
+
+            else if (opcao.indice.indexOf("tesouro semestral") != -1) {
+              tesouroSemestral.push(valorArredondado);
+            }
+            //valores calculados apenas uma vez \/
+            else if (opcao.indice.indexOf('poupanca') != -1) {
+              poupancaGrafico = valorArredondado
+
+            } else if (opcao.indice.indexOf('tesouro selic') != -1) {
+              tesouroselicGrafico = valorArredondado
+            } else if (opcao.indice.indexOf('tesouro 2021') != -1) {
+              tesouro2021Grafico = valorArredondado
+            } else if (opcao.indice.indexOf('tesouro 2025') != -1) {
+              tesouro2025Grafico = valorArredondado
+            }
+
+            melhoresInvestimentosDoPeriodo += preencheLinha(opcao, jurosCompostos(quantia, inflacao / 100, projectionType / 12))
+          }
+
+
+          melhoresInvestimentosDoPeriodo += `</tbody></table></div></div></div>`
+          let valorInflacao = jurosCompostos(quantia, inflacao / 100, projectionType / 12)
+
+          graficos.push(
+            {
+              data: {
+                columns: [
+                  cdbDI,
+                  cdbFixo,
+                  cdbIPCA,
+
+                  lciDI,
+                  lciFixo,
+                  lciIPCA,
+
+                  tesouroIPCA,
+                  tesouroSemestral
+                ],
+              },
+              grid: {
+                y: {
+                  lines: [
+                    {
+                      value: poupancaGrafico,
+                      text: "Poupança: " + poupancaGrafico
+                    },
+                    {
+                      value: tesouroselicGrafico,
+                      text: "Tesouro Selic: " + tesouroselicGrafico,
+                    },
+
+                    {
+                      value: tesouro2021Grafico,
+                      text: "Tesouro 2021: " + tesouro2021Grafico,
+                    },
+                    {
+                      value: tesouro2025Grafico,
+                      text: "Tesouro 2025: " + tesouro2025Grafico,
+                    },
+
+                    {
+                      value: valorInflacao,
+                      text: "Inflação: " + valorInflacao,
+                      class: 'vermelho'
+                    },
+                  ]
+                }
+              },
+              title: {
+                text: `Total de rendimentos de um único aporte de R$ ${quantia} investido por ${projectionType} meses`,
+              },
+              tooltip: {
+                order: "desc",
+                format: {
+                  title: function () {
+                    return 'Rendimento liquido';
+                  },
+                },
+              },
+              axis: {
+                x: {
+                  show: false
+                },
+                y: {
+                  max: item.valorLiquido
+                }
+              },
+              bindto: `#meses_${projectionType}`,
+            })
+
+          document.querySelector(`#accordionExample`).innerHTML += melhoresInvestimentosDoPeriodo;
+
+        }
+        projectionType = projectionType + 6;
+      }
+      document.querySelector('#projecao-melhor-investimento').innerHTML = melhorInvestimento;
+
+
+
+      //Filling the grid with information
+
+      let html = "";
+      const ordenadoPreco = _.sortBy(projecao, [function (o) {
+        return o.valorLiquido
+      }])
+      for (const item of ordenadoPreco) {
+        html += preencheLinha(item)
+      }
+      document.querySelector('#projecao').innerHTML = html
+
+      //desenhando todos os graficos
+      for (const x of graficos) {
+        bb.generate(x)
+      }
+    }
+
+    function download() {
+      var htmltable = document.getElementById('tabela-projecao');
+      var html = htmltable.outerHTML;
+      window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+
+    function preencheLinha(item, inflacao = 0) {
+      return `
+      <tr ${item.valorLiquido <= inflacao ? "style='color:red'" : ''}>
+        <td>${item.indice}</td>
+        <td>${item.prazo} meses</td>
+        <td>${item.taxa}</td>
+        <td>${item.aliquotaIR}</td>
+        <td>${item.valorBruto}</td>
+        <td>${item.valorIR}</td>
+        <td>${item.valorLiquido.toFixed(2)}</td>
+      </tr>`;
+    }
+  </script>
+</body>
+
+</html>
