@@ -115,6 +115,34 @@ ul{
 
 /* final Página home_________________________________________________________ */
 
+/*inicio Página portfolio*/
+
+.titulo-portfolio{
+	margin-top: 30px;
+	text-align: center;
+	
+}
+
+.subtitulo{
+	margin-left: 4%;
+}
+
+.descricao-img{
+	margin-left: 4%;
+	display: flex;
+	gap: 60px;
+	margin-bottom: 100px;
+
+}
+
+.img-pagina-portfolio{
+	height: 400px;
+	width: 400px;
+}
+
+
+/* final Página portfolio_________________________________________________________ */
+
 
 /* inicio Pagina Contato */
 
