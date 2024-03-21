@@ -30,6 +30,10 @@
   color: #1abc9c;
 }
 
+.cabecalho-menu-item.active{
+	color: yellow;
+}
+
 
 ul{
     list-style-type: none;
@@ -90,7 +94,7 @@ ul{
 }
 
 .conteudo-img-avatar{
-	width: 400px;
+	width: 350px;
 }
 
 .conteudo-apresentacao-secundario{
@@ -174,6 +178,10 @@ fieldset{
 	gap: 15px
 }
 
+input{
+	font-size: small;
+}
+
 .label-email{
 	margin-left: 4.3%;
 }
@@ -210,3 +218,24 @@ textarea{
 }
 
 /* final rodapé________________________________________________________________ */
+
+
+/* Celulares */
+
+@media (max-width: 450px){
+	.cabecalho{
+		display: flex;
+		flex-direction: column;
+	}
+
+	.conteudo-apresentacao-primario{
+		display: flex;
+		flex-direction: column;
+	}
+
+	.descricao-img{
+		display: flex;
+		flex-direction: column;
+	}
+
+}
