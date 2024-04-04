@@ -1,0 +1,241 @@
+
+/* inicio Menu */
+.cabecalho {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 35px;
+	justify-content: space-between;
+	background-color: #343a40;
+}
+
+.cabecalho-logo {
+	color: #FFFFFF;
+}
+
+.cabecalho-menu {
+	color: #FFFFFF;
+	font-weight: 600;
+	font-size: 20px;
+	display: flex;
+	gap: 32px;
+}
+
+.cabecalho-menu-item{
+  text-decoration: none;
+  color: #FFFFFF;  
+}
+
+.cabecalho-menu-item:hover{
+  color: #1abc9c;
+}
+
+.cabecalho-menu-item.active{
+	color: yellow;
+}
+
+
+ul{
+    list-style-type: none;
+}
+
+/* final Menu__________________________________________________ */
+
+
+
+/* inicio Página home */
+
+.conteudo-apresentacao-primario{
+	display: flex;
+	align-items: center;
+}
+
+.conteudo-apresentacao{
+	margin-left: 100px;
+	margin-top: 50px;
+	margin-bottom:  60px;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;	
+
+}
+
+.conteudo-apresentacao-nome{
+	font-family: 'Righteous', cursive;
+	font-weight: 400px;
+	font-size: 40px;  
+
+}
+
+.conteudo-apresentacao-escrito{
+	font-family: 'Sarala', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+
+}
+
+.conteudo-apresentacao-botao{
+	background-color: #343a40;
+    width: 180px;
+    height: 60px;
+    border: none;
+	border-radius: 20px;
+    font-family: 'Sarala', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+	
+	
+}
+
+.link-botao{
+	text-decoration: none;
+	color: #FFF;
+	
+}
+
+.conteudo-img-avatar{
+	width: 350px;
+}
+
+.conteudo-apresentacao-secundario{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 30px;
+	margin-top: 50px;
+
+}
+
+.conteudo-secundario-titulo{
+	border-top: 2px solid #000;
+	padding-top: 48px;
+
+}
+
+.conteudo-secundario-paragrafo{
+	text-align: center;
+	
+}
+
+/* final Página home_________________________________________________________ */
+
+/*inicio Página portfolio*/
+
+.titulo-portfolio{
+	margin-top: 30px;
+	text-align: center;
+	
+}
+
+.subtitulo{
+	margin-left: 4%;
+}
+
+.descricao-img{
+	margin-left: 4%;
+	display: flex;
+	gap: 60px;
+	margin-bottom: 100px;
+
+}
+
+.img-pagina-portfolio{
+	height: 400px;
+	width: 400px;
+}
+
+
+/* final Página portfolio_________________________________________________________ */
+
+
+/* inicio Pagina Contato */
+
+
+#titulo{
+	margin-top: 50px;
+	margin-left: 6%;
+
+}
+
+#subtitulo{
+	font-size: 30px;
+	margin-left: 4%;
+}
+
+.end{
+	margin-left: 4%;
+}
+
+.redes-sociais{
+	font-size: 25px;
+	margin-left: 4%;
+}
+
+fieldset{
+	margin-left: 4%;
+	display: flex;
+	flex-direction: row;
+	gap: 15px
+}
+
+input{
+	font-size: small;
+}
+
+.label-email{
+	margin-left: 4.3%;
+}
+
+.mensagem{
+	margin-left: 4%;
+	
+}
+
+textarea{
+	width: 400px;
+	height: 150px;	
+}
+
+.botoes-formulario{
+	margin-left: 16%;
+	width: 180px;
+    height: 60px;
+    font-size: 24px;
+
+}
+
+
+/* Final Página Contato */
+
+
+/* inicio rodapé */
+.icons {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    background-color: #a8a8a8;
+    
+}
+
+/* final rodapé________________________________________________________________ */
+
+
+/* Celulares */
+
+@media (max-width: 450px){
+	.cabecalho{
+		display: flex;
+		flex-direction: column;
+	}
+
+	.conteudo-apresentacao-primario{
+		display: flex;
+		flex-direction: column;
+	}
+
+	.descricao-img{
+		display: flex;
+		flex-direction: column;
+	}
+
+}
